@@ -34,8 +34,12 @@
         <h2>Что вы хотите сделать?</h2>
         <ul>
             <li><a href="/books">Посмотреть книги</a></li>
-            <li><a href="#add-book-form" onclick="showAddBookForm()">Добавить новую книгу</a></li>
         </ul>
+
+        <ul>
+             <li><a href="#add-book-form" onclick="showAddBookForm()">Добавить новую книгу</a></li>
+        </ul>
+
     </section>
 
     <div id="add-book-form" style="display: none;" class="form-section">
@@ -43,7 +47,7 @@
         <form id="bookForm">
             <input type="text" id="title" placeholder="Название" required><br>
             <input type="text" id="author" placeholder="Автор" required><br>
-            <textarea id="description" placeholder="Описание" required></textarea><br>
+            <input type="text" id="description" placeholder="Описание" required><br>
             <input type="number" id="year" placeholder="Год публикации" required><br>
             <button type="button" onclick="addBook()">Добавить</button>
         </form>
