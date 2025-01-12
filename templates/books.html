@@ -5,31 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список книг</title>
+    <!-- Подключение CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Список книг</h1>
-    <nav>
+    <header>
+        <h1 class="main-title">Список книг</h1>
+    </header>
+
+    <nav class="navigation">
         <a href="/">Главная</a> |
         <a href="/books">Книги</a>
     </nav>
 
-    <div id="book-list">
+    <section class="book-list">
         {% if books %}
             {% for book in books %}
-                <div class="book">
-                    <h2>{{ book.title }}</h2>
+                <div class="book-card">
+                    <h2 class="book-title">{{ book.title }}</h2>
                     <p><strong>Автор:</strong> {{ book.author }}</p>
                     <p><strong>Описание:</strong> {{ book.description }}</p>
                     <p><strong>Год публикации:</strong> {{ book.year }}</p>
                 </div>
             {% endfor %}
         {% else %}
-            <p>Книг пока нет.</p>
+            <p class="no-books">Книг пока нет. Добавьте первую книгу!</p>
         {% endif %}
-    </div>
+    </section>
 
-    <footer>
+    <footer class="footer">
         <p>Все права защищены © 2025</p>
     </footer>
 </body>

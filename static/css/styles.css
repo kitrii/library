@@ -1,39 +1,192 @@
 /* static/css/styles.css */
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-nav a {
-    margin-right: 15px;
-    text-decoration: none;
-    color: #007BFF;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-#book-list {
-    margin-top: 20px;
-}
-
-.book {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
-
-.book h2 {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
     margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
     color: #333;
 }
 
-footer {
-    margin-top: 20px;
+header {
+    background-color: #4CAF50;
+    color: white;
     text-align: center;
-    font-size: 14px;
-    color: #666;
+    padding: 20px 0;
+}
+
+.main-title {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.navigation {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1.2em;
+}
+
+.navigation a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.intro .text {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.intro .text h2 {
+    font-size: 2em;
+    color: #4CAF50;
+}
+
+.intro .text p {
+    font-size: 1.2em;
+}
+
+.intro .image {
+    flex: 1;
+    text-align: center;
+}
+
+.intro .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.actions {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.actions h2 {
+    font-size: 1.8em;
+    color: #4CAF50;
+}
+
+.actions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.actions ul li {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.actions ul li a {
+    text-decoration: none;
+    color: #333;
+    background-color: #4CAF50;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.actions ul li a:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+.form-section {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h3 {
+    font-size: 1.5em;
+    color: #4CAF50;
+}
+
+form input, form textarea, form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Список книг */
+.book-list {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.book-title {
+    font-size: 1.8em;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.book-card p {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #333;
+}
+
+.no-books {
+    font-size: 1.5em;
+    text-align: center;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* Нижний колонтитул */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    font-size: 1em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }

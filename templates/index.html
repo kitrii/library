@@ -5,36 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Библиотека</title>
+    <!-- Подключение CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Добро пожаловать в библиотеку</h1>
-    <nav>
+    <header>
+        <h1 class="main-title">Добро пожаловать в библиотеку Нагих Екатерины</h1>
+    </header>
+
+    <nav class="navigation">
         <a href="/">Главная</a> |
-        <a href="/books">Книги</a> <!-- Ссылка на страницу со списком книг -->
+        <a href="/books">Книги</a>
     </nav>
 
-    <div class="tab">
+    <section class="intro">
+        <div class="text">
+            <h2>Исследуйте нашу коллекцию книг!</h2>
+            <p>В нашей библиотеке вы найдете множество интересных книг на любой вкус. Вы можете просмотреть список доступных книг или добавить свою любимую.</p>
+        </div>
+        <div class="image">
+            <img src="{{ url_for('static', filename='images/library.jpg') }}" alt="Библиотека">
+        </div>
+    </section>
+
+    <section class="actions">
         <h2>Что вы хотите сделать?</h2>
         <ul>
             <li><a href="/books">Посмотреть книги</a></li>
             <li><a href="#add-book-form" onclick="showAddBookForm()">Добавить новую книгу</a></li>
         </ul>
+    </section>
+
+    <div id="add-book-form" style="display: none;" class="form-section">
+        <h3>Добавить новую книгу</h3>
+        <form id="bookForm">
+            <input type="text" id="title" placeholder="Название" required><br>
+            <input type="text" id="author" placeholder="Автор" required><br>
+            <textarea id="description" placeholder="Описание" required></textarea><br>
+            <input type="number" id="year" placeholder="Год публикации" required><br>
+            <button type="button" onclick="addBook()">Добавить</button>
+        </form>
     </div>
 
-    <div id="content">
-        <div id="add-book-form" style="display: none;">
-            <h3>Добавить новую книгу</h3>
-            <form id="bookForm">
-                <input type="text" id="title" placeholder="Название" required><br>
-                <input type="text" id="author" placeholder="Автор" required><br>
-                <textarea id="description" placeholder="Описание" required></textarea><br>
-                <input type="number" id="year" placeholder="Год публикации" required><br>
-                <button type="button" onclick="addBook()">Добавить</button>
-            </form>
-        </div>
-    </div>
-
+    <!-- Подключение JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
