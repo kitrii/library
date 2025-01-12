@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Добро пожаловать в библиотеку</h1>
+    <nav>
+        <a href="/">Главная</a> |
+        <a href="/books">Книги</a> <!-- Ссылка на страницу со списком книг -->
+    </nav>
+
+    <div class="tab">
+        <h2>Что вы хотите сделать?</h2>
+        <ul>
+            <li><a href="/books">Посмотреть книги</a></li>
+            <li><a href="#add-book-form" onclick="showAddBookForm()">Добавить новую книгу</a></li>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="add-book-form" style="display: none;">
+            <h3>Добавить новую книгу</h3>
+            <form id="bookForm">
+                <input type="text" id="title" placeholder="Название" required><br>
+                <input type="text" id="author" placeholder="Автор" required><br>
+                <textarea id="description" placeholder="Описание" required></textarea><br>
+                <input type="number" id="year" placeholder="Год публикации" required><br>
+                <button type="button" onclick="addBook()">Добавить</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

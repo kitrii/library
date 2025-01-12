@@ -1,0 +1,36 @@
+<!-- templates/books.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список книг</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Список книг</h1>
+    <nav>
+        <a href="/">Главная</a> |
+        <a href="/books">Книги</a>
+    </nav>
+
+    <div id="book-list">
+        {% if books %}
+            {% for book in books %}
+                <div class="book">
+                    <h2>{{ book.title }}</h2>
+                    <p><strong>Автор:</strong> {{ book.author }}</p>
+                    <p><strong>Описание:</strong> {{ book.description }}</p>
+                    <p><strong>Год публикации:</strong> {{ book.year }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Книг пока нет.</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Все права защищены © 2025</p>
+    </footer>
+</body>
+</html>
