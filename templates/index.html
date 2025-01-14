@@ -12,12 +12,13 @@
 </head>
 <body>
     <header>
-        <h1 class="main-title">Добро пожаловать в библиотеку Нагих Екатерины</h1>
+        <h1 class="main-title">Добро пожаловать в библиотеку</h1>
     </header>
 
     <nav class="navigation">
         <a href="/">Главная</a> |
         <a href="/books">Книги</a>
+        <a href="/add_book">Добавить книгу</a>
     </nav>
 
     <section class="intro">
@@ -37,22 +38,10 @@
         </ul>
 
         <ul>
-             <li><a href="#add-book-form" onclick="showAddBookForm()">Добавить новую книгу</a></li>
+             <li><a href="/add_book">Добавить новую книгу</a></li>
         </ul>
 
     </section>
-
-    <div id="add-book-form" style="display: none;" class="form-section">
-        <h3>Добавить новую книгу</h3>
-        <form id="bookForm">
-            <input type="text" id="title" placeholder="Название" required><br>
-            <input type="text" id="author" placeholder="Автор" required><br>
-            <input type="text" id="description" placeholder="Описание" required><br>
-            <input type="number" id="year" placeholder="Год публикации" required><br>
-            <button type="button" onclick="addBook()">Добавить</button>
-        </form>
-    </div>
-
     <!-- Подключение JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

@@ -29,6 +29,11 @@ def books_page():
     books = Book.query.all()
     return render_template('books.html', books=books)
 
+@app.route('/add_book')
+def add_book_page():
+    return render_template('add_book.html')
+
+
 # Роут для добавления книги через API
 @app.route('/api/books', methods=['POST'])
 def add_book():

@@ -1,0 +1,52 @@
+<!-- templates/add_book.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить книгу</title>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Подключение Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1 class="main-title">Добавить книгу</h1>
+    </header>
+
+    <nav class="navigation">
+        <a href="/">Главная</a> |
+        <a href="/books">Книги</a> |
+        <a href="/add_book">Добавить книгу</a>
+    </nav>
+
+<section class="form-section">
+    <h3>Добавьте новую книгу</h3>
+    <form id="bookForm">
+        <div class="form-group">
+            <label for="title">Название:</label>
+            <input type="text" id="title" placeholder="Введите название" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Автор:</label>
+            <input type="text" id="author" placeholder="Введите автора" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <input type="text" id="description" placeholder="Введите описание" required>
+        </div>
+        <div class="form-group">
+            <label for="year">Год публикации:</label>
+            <input type="number" id="year" placeholder="Введите год" required>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="addBook()">Добавить</button>
+        </div>
+    </form>
+</section>
+
+    <!-- Подключение JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
