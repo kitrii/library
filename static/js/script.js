@@ -34,3 +34,25 @@ async function addBook() {
     alert('Книга добавлена!');
     showBooks();
 }
+
+async function deleteBook(bookId) {
+    const confirmDelete = confirm('Вы уверены, что хотите удалить эту книгу?');
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(`/api/books/${bookId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            alert('Книга успешно удалена!');
+            document.querySelector(`.book-card[data-id="${bookId}"]`).remove();
+        } else {
+            const error = await response.json();
+            alert(`Ошибка при удалении книги: ${error.message}`);
+        }
+    } catch (err) {
+        console.error('Ошибка при удалении книги:', err);
+        alert('Произошла ошибка. Попробуйте снова.');
+    }
+}

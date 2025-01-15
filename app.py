@@ -54,6 +54,19 @@ def add_book():
         print(f"Ошибка при добавлении книги: {e}")
         return jsonify({'error': str(e)}), 400
 
+@app.route('/api/books/<int:book_id>', methods=['DELETE'])
+def delete_book(book_id):
+    try:
+        book = Book.query.get(book_id)
+        if not book:
+            return jsonify({'message': 'Книга не найдена'}), 404
+
+        db.session.delete(book)
+        db.session.commit()
+        return jsonify({'message': 'Книга успешно удалена'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     # Создание таблиц в базе данных перед запуском сервера
     with app.app_context():
