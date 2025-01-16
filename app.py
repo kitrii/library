@@ -1,14 +1,22 @@
 import os
 
-from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(BASE_DIR, 'books.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 
 # Модель книги
 class Book(db.Model):
@@ -17,6 +25,66 @@ class Book(db.Model):
     author = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
     year = db.Column(db.Integer, nullable=False)
+
+
+# Модель пользователя
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
+
+
+# Загрузка пользователя из базы данных
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+# Регистрация пользователя
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+        new_user = User(username=username, password_hash=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+# Авторизация пользователя
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+
+        if user and bcrypt.check_password_hash(user.password_hash, password):
+            login_user(user)
+            return redirect(url_for('index'))
+        else:
+            return 'Неверные учетные данные', 401
+    return render_template('login.html')
+
+
+# Выход из системы
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+# Пример защищенного маршрута
+@app.route('/protected')
+@login_required
+def protected():
+    return f'Добро пожаловать, {current_user.username}!'
+
 
 # Главная страница (index.html)
 @app.route('/')
@@ -67,6 +135,14 @@ def delete_book(book_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/privacy_policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@app.route('/cookie_policy')
+def cookie_policy():
+    return render_template('cookie_policy.html')
+
 if __name__ == '__main__':
     # Создание таблиц в базе данных перед запуском сервера
     with app.app_context():
@@ -76,3 +152,5 @@ if __name__ == '__main__':
 
     # Запуск приложения
     app.run(debug=True)
+
+

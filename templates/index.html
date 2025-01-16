@@ -1,24 +1,28 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Библиотека</title>
-    <!-- Подключение CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <!-- Подключение Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
         <h1 class="main-title">Добро пожаловать в библиотеку</h1>
     </header>
 
     <nav class="navigation">
         <a href="/">Главная</a> |
-        <a href="/books">Книги</a>
-        <a href="/add_book">Добавить книгу</a>
+        <a href="/books">Книги</a> |
+        <a href="/add_book">Добавить книгу</a> |
+        {% if current_user.is_authenticated %}
+            <a href="/logout">Выйти ({{ current_user.username }})</a>
+        {% else %}
+            <a href="/login">Вход</a> |
+            <a href="/register">Регистрация</a>
+        {% endif %}
     </nav>
 
     <section class="intro">
@@ -40,8 +44,17 @@
         <ul>
              <li><a href="/add_book">Добавить новую книгу</a></li>
         </ul>
-
     </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Библиотека. <a href="/privacy_policy">Политика конфиденциальности</a> | <a href="/cookie_policy">Политика использования файлов cookie</a></p>
+    </footer>
+
+    <!-- Баннер с уведомлением о cookie -->
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Мы используем файлы cookie для улучшения работы сайта. Продолжая использование, вы соглашаетесь с <a href="/cookie_policy">политикой использования файлов cookie</a>.</p>
+        <button id="accept-cookies">Принять</button>
+    </div>
     <!-- Подключение JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
